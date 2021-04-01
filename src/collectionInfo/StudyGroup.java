@@ -1,6 +1,7 @@
-package collections;
+package collectionInfo;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class StudyGroup implements Comparable<StudyGroup> {
 
@@ -14,9 +15,19 @@ public class StudyGroup implements Comparable<StudyGroup> {
     //private Semester semesterEnum; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
 
+    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, int shouldBeExpelled, Person groupAdmin) {
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.creationDate = creationDate;
+        this.studentsCount = studentsCount;
+        this.shouldBeExpelled = shouldBeExpelled;
+        this.groupAdmin = groupAdmin;
+    }
+
     @Override
     public int compareTo(StudyGroup groupObj) {
-        return id.comareTo(groupObj.getId());
+        return id.compareTo(groupObj.getId());
     }
 
     public Integer getId() {
@@ -46,4 +57,37 @@ public class StudyGroup implements Comparable<StudyGroup> {
     public Person getGroupAdmin() {
         return groupAdmin;
     }
+
+    @Override
+    public String toString() {
+        return "[StudyGroup information]" + "\n" +
+                "GroupId – " + id +
+                "GroupName – " + name + "\n" +
+                "GroupCoordinates – " + coordinates + "\n" +
+                "GroupCreationDate – " + creationDate + "\n" +
+                "StudentsCount – "  + studentsCount +  "\n" +
+                "ShouldBeExpelled...  " + shouldBeExpelled + "\n" +
+                "GroupAdmin – " + groupAdmin;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (o instanceof StudyGroup) {
+            StudyGroup studyGroup = (StudyGroup) o;
+            return studentsCount == studyGroup.studentsCount &&
+                    shouldBeExpelled == studyGroup.shouldBeExpelled &&
+                    Objects.equals(name, studyGroup.name) &&
+                    Objects.equals(coordinates, studyGroup.coordinates) &&
+                    Objects.equals(groupAdmin, studyGroup.groupAdmin);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, coordinates, studentsCount, shouldBeExpelled, groupAdmin);
+    }
 }
+

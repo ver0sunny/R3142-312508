@@ -1,8 +1,8 @@
 package commands;
 
-public class InsertCommand extends AbstractCommand {
+public class InsertAt extends AbstractCommand {
 
-    public InsertCommand(String name, String description) {
+    public InsertAt(String name, String description) {
         super("insert_at index {element}", "inserts the element to the given position");
     }
 

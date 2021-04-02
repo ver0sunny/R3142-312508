@@ -1,8 +1,8 @@
 package commands;
 
-public class AddIfCommand extends AbstractCommand {
+public class AddIfMin extends AbstractCommand {
 
-    public AddIfCommand(String name, String description) {
+    public AddIfMin(String name, String description) {
         super("add_if_min {element}", "adds the element to colection if its less than the least element");
     }
 

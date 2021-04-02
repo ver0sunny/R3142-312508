@@ -1,8 +1,8 @@
 package commands;
 
-public class AddCommand extends AbstractCommand {
+public class Add extends AbstractCommand {
 
-    public AddCommand(String name, String description) {
+    public Add(String name, String description) {
         super("add {element}", "addition of a new element to the collection");
     }
 

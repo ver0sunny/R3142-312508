@@ -1,8 +1,8 @@
 package commands;
 
-public class InfoCommand extends AbstractCommand {
+public class Info extends AbstractCommand {
 
-    public InfoCommand(String name, String description) {
+    public Info(String name, String description) {
         super("info", "provides information on Collection");
     }
 

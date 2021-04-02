@@ -1,8 +1,8 @@
 package commands;
 
-public class ClearCommand extends AbstractCommand {
+public class Clear extends AbstractCommand {
 
-    public ClearCommand(String name, String description) {
+    public Clear(String name, String description) {
         super("clear", "empties collection");
     }
 

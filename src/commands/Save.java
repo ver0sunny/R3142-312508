@@ -1,9 +1,9 @@
 package commands;
 
-public class SaveCommand extends AbstractCommand {
+public class Save extends AbstractCommand {
 
 
-    public SaveCommand(String name, String description) {
+    public Save(String name, String description) {
         super("save", "saves collection to a file");
     }
 

@@ -1,8 +1,8 @@
 package commands;
 
-public class RemoveAnyCommand extends AbstractCommand {
+public class RemoveByStudentCount extends AbstractCommand {
 
-    public RemoveAnyCommand(String name, String description) {
+    public RemoveByStudentCount(String name, String description) {
         super("remove_any_by_students_count <studentsCount>", "deletes element, which studentCount field equals to the one provided");
     }
 

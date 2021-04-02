@@ -1,8 +1,8 @@
 package commands;
 
-public class ExitCommand extends AbstractCommand {
+public class Exit extends AbstractCommand {
 
-    public ExitCommand(String name, String description) {
+    public Exit(String name, String description) {
         super("exit", "completes program, without no data saved to file");
     }
 

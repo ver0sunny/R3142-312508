@@ -1,8 +1,8 @@
 package commands;
 
-public class HelpCommand extends AbstractCommand {
+public class Help extends AbstractCommand {
 
-    public HelpCommand(String name, String description) {
+    public Help(String name, String description) {
         super("help", "info on available commands");
     }
 

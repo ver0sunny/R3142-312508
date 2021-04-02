@@ -1,8 +1,8 @@
 package commands;
 
-public class UpdateCommand extends AbstractCommand {
+public class Update extends AbstractCommand {
 
-    public UpdateCommand(String name, String description) {
+    public Update(String name, String description) {
         super("update <id> {element}", "update collection element, which <id> is equal to the one provided");
     }
 

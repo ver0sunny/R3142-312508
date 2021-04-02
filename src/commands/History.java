@@ -1,8 +1,8 @@
 package commands;
 
-public class HistoryCommand extends AbstractCommand {
+public class History extends AbstractCommand {
 
-    public HistoryCommand(String name, String description) {
+    public History(String name, String description) {
         super("history", "displays 12 previous commands with no argument(s)");
     }
 

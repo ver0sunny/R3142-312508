@@ -11,11 +11,11 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private java.time.LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private int studentsCount; //Значение поля должно быть больше 0
     private int shouldBeExpelled; //Значение поля должно быть больше 0
-    //private FormOfEducation formOfEducation; //Поле не может быть null
-    //private Semester semesterEnum; //Поле не может быть null
+    private FormOfEducation formOfEducation; //Поле не может быть null
+    private Semester semester; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
 
-    public StudyGroup(Integer id, String name, Coordinates coordinates, LocalDateTime creationDate, int studentsCount, int shouldBeExpelled, Person groupAdmin) {
+    public StudyGroup(Integer id, String name, Coordinates coordinates, int studentsCount, int shouldBeExpelled, Person groupAdmin) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -54,18 +54,20 @@ public class StudyGroup implements Comparable<StudyGroup> {
         return shouldBeExpelled;
     }
 
-    public Person getGroupAdmin() {
-        return groupAdmin;
-    }
+    public Person getGroupAdmin() { return groupAdmin; }
+
+    public FormOfEducation getFormOfEducation() { return formOfEducation; }
+
+    public Semester getSemester() { return semester; }
 
     @Override
     public String toString() {
-        return "[StudyGroup information]" + "\n" +
+        return  "[" + name + " " + "information]" + "\n" +
                 "GroupId – " + id +
                 "GroupName – " + name + "\n" +
                 "GroupCoordinates – " + coordinates + "\n" +
                 "GroupCreationDate – " + creationDate + "\n" +
-                "StudentsCount – "  + studentsCount +  "\n" +
+                "StudentsCount – " + studentsCount + "\n" +
                 "ShouldBeExpelled...  " + shouldBeExpelled + "\n" +
                 "GroupAdmin – " + groupAdmin;
     }

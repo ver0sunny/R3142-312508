@@ -19,25 +19,25 @@ public class FileManager {
 //    }
 
     //добавить обработку ошибки с выводом сообщений???
-    public static void writeToFile(LinkedList<StudyGroup> collection) {
+    public void writeToFile(LinkedList<StudyGroup> collection) {
 //        if (uploadedFile != null) {
         try (FileOutputStream fos = new FileOutputStream("groupsCollection.json")) {
             PrintWriter pw = new PrintWriter(fos);
             pw.write(gson.toJson(collection));
             pw.close();
         } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
 
-    public LinkedList<StudyGroup> readFile() {
-        Scanner sc = new Scanner(System.in);
-
+    public static LinkedList<StudyGroup> readFile() throws FileNotFoundException {
+        File filename = new File("groupsCollection.json");
+        Scanner sc = new Scanner(filename);
         LinkedList<StudyGroup> collection;
-        Type type = new TypeToken<LinkedList<StudyGroup>>() {}.getType();
-        collection = gson.fromJson(sc.nextLine().trim(), type);
-
+        collection = gson.fromJson(sc.nextLine().trim());
         return collection;
+
     }
 
     @Override

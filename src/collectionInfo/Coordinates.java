@@ -28,12 +28,9 @@ public class Coordinates {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (o instanceof Coordinates) {
-            Coordinates that = (Coordinates) o;
-            return Float.compare(that.x, x) == 0 &&
-                    y == that.y;
-        }
-        return false;
+        Coordinates that = (Coordinates) o;
+        return Float.compare(that.x, x) == 0 &&
+                y == that.y;
     }
 
     @Override

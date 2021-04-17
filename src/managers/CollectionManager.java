@@ -97,16 +97,12 @@ public class CollectionManager {
         return null;
     }
 
-    public class SortBySemester implements Comparator<StudyGroup> {
-        public int compare(StudyGroup a, StudyGroup b) {
-            if (a.getSemester().compareTo(b.getSemester()) > 0) return 1; //a<b
-            else if (a.getSemester().compareTo(b.getSemester()) == 0 ) return 0;
-            else return -1;
-        }
-    }
-
     public String decendBySemester(LinkedList<StudyGroup> studyGroups) {
-        Collections.sort(studyGroups, new SortBySemester());
+        studyGroups.sort((a, b) -> {
+            if (a.getSemester().compareTo(b.getSemester()) > 0) return 1; //a<b
+            else if (a.getSemester().compareTo(b.getSemester()) == 0) return 0;
+            else return -1;
+        });
         return studyGroups.toString();
     }
 

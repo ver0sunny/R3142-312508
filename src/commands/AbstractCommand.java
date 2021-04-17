@@ -1,7 +1,5 @@
 package commands;
 
-import java.util.Objects;
-
 public abstract class AbstractCommand implements Command {
     private String name;
     private String description;
@@ -10,6 +8,8 @@ public abstract class AbstractCommand implements Command {
         this.description = description;
         this.name = name;
     }
+
+    public void execute() {}
 
     public String getName() {
         return name;

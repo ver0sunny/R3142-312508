@@ -8,10 +8,10 @@ public enum Semester {
     EIGHTH;
 
     public static String listAll() {
-        String listAll = "";
+        StringBuilder listAll = new StringBuilder();
         for (Semester semester : values()) {
-            listAll += semester.name() + ", ";
+            listAll.append(semester.name()).append(", ");
         }
-        return listAll;
+        return listAll.toString();
     }
 }

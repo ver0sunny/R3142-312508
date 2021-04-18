@@ -15,7 +15,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private Semester semester; //Поле не может быть null
     private Person groupAdmin; //Поле не может быть null
 
-    public StudyGroup(Integer id, String name, Coordinates coordinates, int studentsCount, int shouldBeExpelled, Person groupAdmin) {
+    public StudyGroup(Integer id, String name, LocalDateTime creationDate, Person groupAdmin, Coordinates coordinates, int studentsCount, int shouldBeExpelled, FormOfEducation formOfEducation, Semester semester) {
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -23,6 +23,8 @@ public class StudyGroup implements Comparable<StudyGroup> {
         this.studentsCount = studentsCount;
         this.shouldBeExpelled = shouldBeExpelled;
         this.groupAdmin = groupAdmin;
+        this.semester = semester;
+        this.formOfEducation = formOfEducation;
     }
 
     @Override
@@ -30,9 +32,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
         return id.compareTo(groupObj.getId());
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() { return id; }
 
     public String getName() {
         return name;
@@ -60,16 +60,57 @@ public class StudyGroup implements Comparable<StudyGroup> {
 
     public Semester getSemester() { return semester; }
 
+    //разбить на отдельные строчки
     @Override
     public String toString() {
-        return  "[" + name + " " + "information]" + "\n" +
-                "GroupId – " + id +
-                "GroupName – " + name + "\n" +
-                "GroupCoordinates – " + coordinates + "\n" +
-                "GroupCreationDate – " + creationDate + "\n" +
-                "StudentsCount – " + studentsCount + "\n" +
-                "ShouldBeExpelled...  " + shouldBeExpelled + "\n" +
-                "GroupAdmin – " + groupAdmin;
+        StringBuilder sb = new StringBuilder();
+        sb.append("\n");
+        sb.append("*-{ ");
+        sb.append(name);
+        sb.append(" ");
+        sb.append("information }-*");
+        sb.append("\n");
+
+        sb.append("Group Id – ");
+        sb.append(id);
+        sb.append("\n");
+
+        sb.append("Group Name – ");
+        sb.append(name);
+        sb.append("\n");
+
+        sb.append("Group Creation Date –- ");
+        sb.append(creationDate);
+        sb.append("\n");
+
+        sb.append("Group Admin:");
+        sb.append(groupAdmin);
+        sb.append("\n");
+
+        sb.append("Group Coordinates – ");
+        sb.append(coordinates);
+        sb.append("\n");
+
+        sb.append("Students Count – ");
+        sb.append(studentsCount);
+        sb.append("\n");
+
+        sb.append("Should Be Expelled...  ");
+        sb.append(shouldBeExpelled);
+        sb.append("\n");
+
+        sb.append("Form Of Education - ");
+        sb.append(formOfEducation);
+        sb.append("\n");
+
+        sb.append("Semester - ");
+        sb.append(semester);
+        sb.append("\n");
+
+        sb.append("-*-*--*-*--*-*--*-*--*-*--*-*-");
+        sb.append("\n");
+
+        return sb.toString();
     }
 
     @Override

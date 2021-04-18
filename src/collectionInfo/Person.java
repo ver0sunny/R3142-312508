@@ -33,11 +33,27 @@ public class Person {
 
     @Override
     public String toString() {
-        return "[Admin] \n" +
-                "Name – " + name + "\n" +
-                "Height=" + height + "\n" +
-                "Weight=" + weight + "\n" +
-                "PassportID='" + passportID + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append(" ").append(name);
+        sb.append("\n");
+
+        sb.append("------admin--info------");
+        sb.append("\n");
+
+        sb.append("height=");
+        sb.append(height);
+        sb.append("\n");
+
+        sb.append("weight=");
+        sb.append(weight);
+        sb.append("\n");
+
+        sb.append("PassportID=");
+        sb.append(passportID);
+        sb.append("\n");
+        sb.append("-----------------------");
+
+        return sb.toString();
     }
 
     @Override

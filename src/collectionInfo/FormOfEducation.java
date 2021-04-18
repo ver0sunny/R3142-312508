@@ -6,7 +6,7 @@ public enum FormOfEducation {
     EVENING_CLASSES;
 
     public static String listAll() {
-        StringBuilder listAll = new StringBuilder(); // StringBuilder
+        StringBuilder listAll = new StringBuilder();
         for (FormOfEducation formOfEducation : values()) {
             listAll.append(formOfEducation.name()).append(", ");
         }

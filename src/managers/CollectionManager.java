@@ -1,19 +1,22 @@
 package managers;
 
 import collectionInfo.FormOfEducation;
-import collectionInfo.Semester;
 import collectionInfo.StudyGroup;
 import exceptions.CollectionIsEmptyException;
-import exceptions.NoElementWithSuchId;
 
-import java.awt.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Comparator;
+import java.util.LinkedList;
 
 public class CollectionManager {
     private LinkedList<StudyGroup> studyGroupsCollection = new LinkedList<>();
     private LocalDateTime creationTime;
-    private FileManager fileManager;
+    private final FileManager fileManager;
+
+    public CollectionManager(FileManager fileManager){
+        this.fileManager = fileManager;
+        loadCollection();
+    }
 
     public LinkedList<StudyGroup> getCollection() {
         return studyGroupsCollection;
@@ -35,13 +38,13 @@ public class CollectionManager {
         return creationTime;
     }
 
-    public void saveCollection(LinkedList<StudyGroup> studyGroups) {
-        fileManager.writeToFile(studyGroups);
-    }
+    public void saveCollection(LinkedList<StudyGroup> studyGroups) { fileManager.writeToFile(studyGroups); }
 
-    public void loadCollection() {
+    public void loadCollection() { studyGroupsCollection = fileManager.readFile(); this.creationTime = LocalDateTime.now(); }
 
-    }
+    public void remove(StudyGroup studyGroup) { studyGroupsCollection.remove(studyGroup); }
+
+
 
     public StudyGroup getFirst() {
         if (studyGroupsCollection.isEmpty()) return null;
@@ -56,21 +59,22 @@ public class CollectionManager {
     public StudyGroup getById(Integer id) {
         if (studyGroupsCollection.isEmpty()) return null;
         for (StudyGroup studyGroup : studyGroupsCollection) {
-            if (studyGroup.getId() == id) return studyGroup;
+            if (studyGroup.getId().equals(id)) return studyGroup;
         }
         return null;
     }
 
-//    public void updateById(Integer id) throws NoElementWithSuchId {
-//        for (StudyGroup studyGroup : studyGroupsCollection) {
-//            if (studyGroup.getId() == id) {  }
-//        }
-//    }
+    public Integer generateId() {
+        if (studyGroupsCollection.isEmpty()) return 1;
+        return studyGroupsCollection.getLast().getId()+1;
+    }
 
     public void removeById(Integer id) throws CollectionIsEmptyException {
         if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-        for (StudyGroup studyGroup : studyGroupsCollection) {
-            if (studyGroup.getId() == id) { studyGroupsCollection.remove(studyGroup); }
+        for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with intellij context
+            if (studyGroup.getId().equals(id)) {
+                studyGroupsCollection.remove(studyGroup);
+            }
         }
     }
 
@@ -84,34 +88,52 @@ public class CollectionManager {
 
     public void removeByStudentsCount(int studyCount) throws CollectionIsEmptyException {
         if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-        for (StudyGroup studyGroup : studyGroupsCollection) {
-            if (studyGroup.getStudentsCount() == studyCount) { studyGroupsCollection.remove(studyGroup); }
+        for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with a context suggestion
+            if (studyGroup.getStudentsCount() == studyCount) {
+                studyGroupsCollection.remove(studyGroup);
+            }
         }
     }
 
-    public StudyGroup greaterThanByFormOfEducation(FormOfEducation formOfEducation) throws CollectionIsEmptyException {
-        if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-        for (StudyGroup studyGroup : studyGroupsCollection) {
-            if (studyGroup.getFormOfEducation().compareTo(formOfEducation) > 0) return studyGroup;
-        }
+    public LinkedList<StudyGroup> greaterThanByFormOfEducation(FormOfEducation formOfEducation) {
+        try {
+            if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
+            for (StudyGroup studyGroup : studyGroupsCollection) {
+                if (studyGroup.getFormOfEducation().compareTo(formOfEducation) > 0) {
+                    LinkedList<StudyGroup> linkedList = new LinkedList<>();
+                    linkedList.add(studyGroup);
+                    return linkedList;
+                }
+            }
+        } catch (CollectionIsEmptyException e) { ConsoleManager.printerror("Collection is empty. There is nothing to compare"); }
         return null;
     }
 
+    class SortDecendBySemester implements Comparator<StudyGroup> {
+        public int compare(StudyGroup sG1, StudyGroup sG2) {
+            if (sG1.getSemester() == sG2.getSemester()) {
+                return 0;
+            } else if (sG1.getSemester().compareTo(sG2.getSemester()) < 0) {
+                return 1;
+            } else {
+                return -1;
+            }
+        }
+    }
+
     public String decendBySemester(LinkedList<StudyGroup> studyGroups) {
-        studyGroups.sort((a, b) -> {
-            if (a.getSemester().compareTo(b.getSemester()) > 0) return 1; //a<b
-            else if (a.getSemester().compareTo(b.getSemester()) == 0) return 0;
-            else return -1;
-        });
+        studyGroups.sort(new SortDecendBySemester());
         return studyGroups.toString();
     }
 
     public String toString() {
-        if (studyGroupsCollection.isEmpty()) { return "This collection is empty (｡•́︿•̀｡)"; }
-        String info = "";
-        for (StudyGroup studyGroup : studyGroupsCollection) {
-            info = info + studyGroup + "\n";
+        if (studyGroupsCollection.isEmpty()) {
+            return "This collection is empty (｡•́︿•̀｡)";
         }
-        return info;
+        StringBuilder info = new StringBuilder();
+        for (StudyGroup studyGroup : studyGroupsCollection) {
+            info.append(studyGroup).append("\n");
+        }
+        return info.toString();
     }
 }

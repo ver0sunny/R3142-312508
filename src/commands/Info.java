@@ -1,13 +1,14 @@
 package commands;
 
-public class Info extends AbstractCommand {
+public class Info extends AbstractCommand implements Command{
 
     public Info(String name, String description) {
         super("info", "provides information on Collection");
     }
 
     @Override
-    public void execute(String command) {
+    public boolean execute() {
+        return true;
 
     }
 }

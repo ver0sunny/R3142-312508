@@ -1,7 +1,9 @@
 package commands;
 
+import exceptions.WrongScriptInputException;
+
 public interface Command {
-    void execute(String command);
+    boolean execute() throws WrongScriptInputException;
     String getName();
     String getDescription();
 }

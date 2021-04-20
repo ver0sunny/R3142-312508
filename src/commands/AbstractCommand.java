@@ -9,8 +9,6 @@ public abstract class AbstractCommand implements Command {
         this.name = name;
     }
 
-    public void execute() {}
-
     public String getName() {
         return name;
     }
@@ -21,7 +19,7 @@ public abstract class AbstractCommand implements Command {
 
     @Override
     public String toString() {
-        return name + "(" + description + ")";
+        return new StringBuilder().append(name).append("(").append(description).append(")").toString();
     }
 
     @Override

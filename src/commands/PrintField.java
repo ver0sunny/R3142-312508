@@ -7,7 +7,8 @@ public class PrintField extends AbstractCommand {
     }
 
     @Override
-    public void execute(String command) {
+    public boolean execute() {
+        return true;
 
     }
 }

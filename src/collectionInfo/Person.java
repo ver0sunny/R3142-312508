@@ -18,18 +18,22 @@ public class Person {
     public String getName() {
         return name;
     }
+    public void setName(String name) {}
 
     public Integer getHeight() {
         return height;
     }
+    public void setHeight(Integer height) {}
 
     public Integer getWeight() {
         return weight;
     }
+    public void setWeight(Integer weight) {}
 
     public String getPassportID() {
         return passportID;
     }
+    public void setPassportID(String passportID) {}
 
     @Override
     public String toString() {

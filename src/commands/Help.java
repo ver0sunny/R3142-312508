@@ -7,7 +7,8 @@ public class Help extends AbstractCommand {
     }
 
     @Override
-    public void execute(String comamand) {
+    public boolean execute() {
+        return true;
 
     }
 }

@@ -8,7 +8,8 @@ public class Save extends AbstractCommand {
     }
 
     @Override
-    public void execute(String command) {
+    public boolean execute() {
+        return true;
 
     }
 }

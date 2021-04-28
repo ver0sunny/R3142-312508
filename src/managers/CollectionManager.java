@@ -9,13 +9,13 @@ import java.util.Comparator;
 import java.util.LinkedList;
 
 public class CollectionManager {
-    private LinkedList<StudyGroup> studyGroupsCollection = new LinkedList<>();
+    private LinkedList<StudyGroup> studyGroupsCollection;
     private LocalDateTime creationTime;
     private final FileManager fileManager;
 
     public CollectionManager(FileManager fileManager) {
         this.fileManager = fileManager;
-        loadCollection();
+        this.studyGroupsCollection = loadCollection();
     }
 
     public LinkedList<StudyGroup> getCollection() {
@@ -42,9 +42,10 @@ public class CollectionManager {
         fileManager.writeToFile(studyGroups);
     }
 
-    public void loadCollection() {
+    public LinkedList<StudyGroup> loadCollection() {
         studyGroupsCollection = fileManager.readFile();
         this.creationTime = LocalDateTime.now();
+        return studyGroupsCollection;
     }
 
     public void remove(StudyGroup studyGroup) {

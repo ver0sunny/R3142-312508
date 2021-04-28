@@ -60,6 +60,42 @@ public class StudyGroup implements Comparable<StudyGroup> {
 
     public Semester getSemester() { return semester; }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setStudentsCount(int studentsCount) {
+        this.studentsCount = studentsCount;
+    }
+
+    public void setShouldBeExpelled(int shouldBeExpelled) {
+        this.shouldBeExpelled = shouldBeExpelled;
+    }
+
+    public void setFormOfEducation(FormOfEducation formOfEducation) {
+        this.formOfEducation = formOfEducation;
+    }
+
+    public void setSemester(Semester semester) {
+        this.semester = semester;
+    }
+
+    public void setGroupAdmin(Person groupAdmin) {
+        this.groupAdmin = groupAdmin;
+    }
+
     //разбить на отдельные строчки
     @Override
     public String toString() {

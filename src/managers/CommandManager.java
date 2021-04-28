@@ -3,14 +3,14 @@ package managers;
 import commands.AbstractCommand;
 import exceptions.WrongScriptInputException;
 
+import java.sql.SQLOutput;
 import java.util.function.Supplier;
 
 public class CommandManager {
 
     private String commandName;
 
-    public CommandManager(String comandName) {
-        this.commandName = comandName;
+    public CommandManager() {
     }
 
     Supplier<CommandFactory> commandFactory = CommandFactory::new;
@@ -18,7 +18,8 @@ public class CommandManager {
     private final int historyLenghth = 12;
     private String[] commandHistory = new String[historyLenghth];
 
-    public void addToHistory() { }
+    public void addToHistory() {
+    }
 
     public String[] getCommandHistory() {
         return commandHistory;
@@ -27,6 +28,10 @@ public class CommandManager {
 
     public void execute(String commandName) throws WrongScriptInputException {
         this.commandName = commandName;
-        commandFactory.get().getCommand("commandName").execute();
+        try {
+            commandFactory.get().getCommand(commandName).execute();
+        } catch (WrongScriptInputException e) {
+            ConsoleManager.printerror("Something went wrong");
+        }
     }
 }

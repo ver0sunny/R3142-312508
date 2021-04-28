@@ -29,7 +29,7 @@ public class InputAndVerifier {
         String name;
         while (true) {
             try {
-                ConsoleManager.println("Enter name__ ");
+                ConsoleManager.println("Enter group name__ ");
                 name = userInput.nextLine().trim();
                 ConsoleManager.println(name);
                 if (name.equals("")) throw new EmptyFieldException();
@@ -275,7 +275,7 @@ public class InputAndVerifier {
         String strFormOfEducation;
         while (true) {
             try {
-                ConsoleManager.println("Enter how many students should be  expelled[> " + minShouldBeExpelled + "]_ ");
+                ConsoleManager.println("Enter form of education__choose from [ " + FormOfEducation.listAll() + " ]_ ");
                 strFormOfEducation = userInput.nextLine().trim();
                 formOfEducation = FormOfEducation.valueOf(strFormOfEducation.toUpperCase());
                 if (strFormOfEducation.equals("")) throw new EmptyFieldException();
@@ -299,7 +299,7 @@ public class InputAndVerifier {
         String strSemester;
         while (true) {
             try {
-                ConsoleManager.println("Enter how many students should be  expelled[> " + minShouldBeExpelled + "]_ ");
+                ConsoleManager.println("Enter semester [ " + Semester.listAll() + " ]_ ");
                 strSemester = userInput.nextLine().trim();
                 semester = Semester.valueOf(strSemester.toUpperCase());
                 if (strSemester.equals("")) throw new EmptyFieldException();

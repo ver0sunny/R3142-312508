@@ -7,6 +7,7 @@ import exceptions.CollectionIsEmptyException;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class CollectionManager {
     private LinkedList<StudyGroup> studyGroupsCollection;
@@ -107,7 +108,6 @@ public class CollectionManager {
 
     }
 
-
     public LinkedList<StudyGroup> greaterThanByFormOfEducation(FormOfEducation formOfEducation) throws CollectionIsEmptyException {
 //        try {
             if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
@@ -150,5 +150,20 @@ public class CollectionManager {
             info.append(studyGroup).append("\n");
         }
         return info.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CollectionManager that = (CollectionManager) o;
+        return Objects.equals(studyGroupsCollection, that.studyGroupsCollection) &&
+                Objects.equals(creationTime, that.creationTime) &&
+                Objects.equals(fileManager, that.fileManager);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(studyGroupsCollection, creationTime, fileManager);
     }
 }

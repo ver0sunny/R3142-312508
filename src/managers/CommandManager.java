@@ -8,12 +8,15 @@ import java.util.function.Supplier;
 
 public class CommandManager {
 
-    private String commandName;
+    private CollectionManager collectionManager;
+    private CommandFactory commandFactory;
+    private InputAndVerifier inputAndVerifier;
 
-    public CommandManager() {
+    public CommandManager(CollectionManager collectionManager, CommandFactory commandFactory, InputAndVerifier inputAndVerifier) {
+        this.commandFactory = commandFactory;
+        this.collectionManager = collectionManager;
+        this.inputAndVerifier = inputAndVerifier;
     }
-
-    Supplier<CommandFactory> commandFactory = CommandFactory::new;
 
     private final int historyLenghth = 12;
     private String[] commandHistory = new String[historyLenghth];
@@ -26,10 +29,10 @@ public class CommandManager {
     }
 
 
+
     public void execute(String commandName) throws WrongScriptInputException {
-        this.commandName = commandName;
         try {
-            commandFactory.get().getCommand(commandName).execute();
+            commandFactory.getCommand(commandName).execute();
         } catch (WrongScriptInputException e) {
             ConsoleManager.printerror("Something went wrong");
         }

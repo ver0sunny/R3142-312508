@@ -2,12 +2,12 @@ package commands;
 
 public class Exit extends AbstractCommand {
 
-    public Exit(String name, String description) {
+    public Exit() {
         super("exit", "completes program, without no data saved to file");
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(String arg) {
         return true;
 
     }

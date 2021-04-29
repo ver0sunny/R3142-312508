@@ -1,9 +1,10 @@
 package commands;
 
+import exceptions.CollectionIsEmptyException;
 import exceptions.WrongScriptInputException;
 
 public interface Command {
-    boolean execute() throws WrongScriptInputException;
+    boolean execute(String arg);
     String getName();
     String getDescription();
 }

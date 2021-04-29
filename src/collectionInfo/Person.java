@@ -78,4 +78,13 @@ public class Person {
     public int hashCode() {
         return Objects.hash(name, height, weight, passportID);
     }
+
+    public int compareTo(Person groupAdmin) {
+        if (height == groupAdmin.getHeight()) {
+            return 0;
+        }
+        if (height > groupAdmin.getHeight()) {
+            return 1;
+        }else return -1; // from great to little
+    } //else return -1 -- from little to great
 }

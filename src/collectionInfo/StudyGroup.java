@@ -29,7 +29,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
 
     @Override
     public int compareTo(StudyGroup groupObj) {
-        return id.compareTo(groupObj.getId());
+        return groupAdmin.compareTo(groupObj.getGroupAdmin());
     }
 
     public Integer getId() { return id; }

@@ -30,7 +30,7 @@ public class CommandManager {
 
 
 
-    public void execute(String commandName) throws WrongScriptInputException {
+    public void execute(String commandName) {
         try {
             commandFactory.getCommand(commandName).execute();
         } catch (WrongScriptInputException e) {

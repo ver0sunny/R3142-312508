@@ -27,6 +27,11 @@ public class CollectionManager {
         return studyGroupsCollection.size();
     }
 
+    // sorts collection starting with the tallest admin
+    public void sortCollection() {
+        studyGroupsCollection.sort(StudyGroup::compareTo);
+    }
+
     public void addToCollection(StudyGroup studyGroup) {
         studyGroupsCollection.add(studyGroup);
     }
@@ -35,12 +40,12 @@ public class CollectionManager {
         studyGroupsCollection.clear();
     }
 
-    public LocalDateTime getCreationTime(StudyGroup studyGroup) {
+    public LocalDateTime getCreationTime() {
         return creationTime;
     }
 
-    public void saveCollection(LinkedList<StudyGroup> studyGroups) {
-        fileManager.writeToFile(studyGroups);
+    public void saveCollection() {
+        fileManager.writeToFile(studyGroupsCollection);
     }
 
     public LinkedList<StudyGroup> loadCollection() {
@@ -48,6 +53,7 @@ public class CollectionManager {
         this.creationTime = LocalDateTime.now();
         return studyGroupsCollection;
     }
+
 
     public void remove(StudyGroup studyGroup) {
         studyGroupsCollection.remove(studyGroup);
@@ -77,12 +83,16 @@ public class CollectionManager {
         return studyGroupsCollection.getLast().getId() + 1;
     }
 
-    public void removeById(Integer id) throws CollectionIsEmptyException {
-        if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-        for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with intellij context
-            if (studyGroup.getId().equals(id)) {
-                studyGroupsCollection.remove(studyGroup);
+    public void removeById(Integer id) {
+        try {
+            if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
+            for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with intellij context
+                if (studyGroup.getId().equals(id)) {
+                    studyGroupsCollection.remove(studyGroup);
+                }
             }
+        }catch (CollectionIsEmptyException e) {
+            ConsoleManager.printerror("Collection is empty");
         }
     }
 
@@ -94,30 +104,30 @@ public class CollectionManager {
 //        return null;
 //    }
 
-    public void removeByStudentsCount(int studyCount) throws CollectionIsEmptyException {
-//        try {
+    public void removeByStudentsCount(int studyCount) {
+        try {
             if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
             for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with a context suggestion
                 if (studyGroup.getStudentsCount() == studyCount) {
                     studyGroupsCollection.remove(studyGroup);
                 }
             }
-//        } catch (CollectionIsEmptyException e) {
-//            ConsoleManager.printerror("No group with this many students found");
-//        }
+        } catch (CollectionIsEmptyException e) {
+            ConsoleManager.printerror("No group with this many students found");
+        }
 
     }
 
     public LinkedList<StudyGroup> greaterThanByFormOfEducation(FormOfEducation formOfEducation) throws CollectionIsEmptyException {
 //        try {
-            if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-            for (StudyGroup studyGroup : studyGroupsCollection) {
-                if (studyGroup.getFormOfEducation().compareTo(formOfEducation) > 0) {
-                    LinkedList<StudyGroup> linkedList = new LinkedList<>();
-                    linkedList.add(studyGroup);
-                    return linkedList;
-                }
+        if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
+        for (StudyGroup studyGroup : studyGroupsCollection) {
+            if (studyGroup.getFormOfEducation().compareTo(formOfEducation) > 0) {
+                LinkedList<StudyGroup> linkedList = new LinkedList<>();
+                linkedList.add(studyGroup);
+                return linkedList;
             }
+        }
 //        } catch (CollectionIsEmptyException e) {
 //            ConsoleManager.printerror("Collection is empty. There is nothing to compare");
 //        }
@@ -136,9 +146,9 @@ public class CollectionManager {
         }
     }
 
-    public String decendBySemester(LinkedList<StudyGroup> studyGroups) {
-        studyGroups.sort(new SortDecendBySemester());
-        return studyGroups.toString();
+    public String decendBySemester() {
+        studyGroupsCollection.sort(new SortDecendBySemester());
+        return studyGroupsCollection.toString();
     }
 
     public String toString() {

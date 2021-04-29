@@ -147,7 +147,7 @@ public class InputAndVerifier {
         return adminPassportId;
     }
 
-    public Person askAdminInfo() throws WrongScriptInputException {
+    public Person askAdminInfo() {
         String adminName = askAdminName();
         Integer adminHeight = askAdminHeight();
         Integer adminWeight = askAdminWeight();

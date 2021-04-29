@@ -1,14 +1,16 @@
 package commands;
 
+import managers.CollectionManager;
+
 public class ExecuteScript extends AbstractCommand {
 
 
-    public ExecuteScript(String name, String description) {
+    public ExecuteScript() {
         super("execute_script <file_name>", "compiles script from the provided file");
     }
 
     @Override
-    public boolean execute() {
+    public boolean execute(String arg) {
         return true;
 
     }

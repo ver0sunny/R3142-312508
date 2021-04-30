@@ -15,7 +15,7 @@ public class AddIfMinCommand extends AbstractCommand {
     private InputAndVerifier inputAndVerifier;
 
     public AddIfMinCommand(CollectionManager collectionManager, InputAndVerifier inputAndVerifier) {
-        super("add_if_min {element}", "adds the element to collection if its less than the least element");
+        super("add_if_min", "adds a new element to collection if its less than the least element");
         this.collectionManager = collectionManager;
         this.inputAndVerifier = inputAndVerifier;
     }
@@ -23,7 +23,7 @@ public class AddIfMinCommand extends AbstractCommand {
 
     @Override
     public boolean execute(String args) {
-        try {
+//        try {
             StudyGroup studyGroup = new StudyGroup(collectionManager.generateId(),
                     inputAndVerifier.askName(),
                     LocalDateTime.now(),
@@ -38,10 +38,10 @@ public class AddIfMinCommand extends AbstractCommand {
                 collectionManager.addToCollection(studyGroup);
                 ConsoleManager.print("Study Group added successfully");
                 return true;
-            } else ConsoleManager.printerror("The Study Group you are trying to add is bigger that the smallest group");
-        }catch (WrongScriptInputException e) {
-            ConsoleManager.printerror("Something is wrong...");
-        }
+            } else ConsoleManager.println("The Study Group you are trying to add is bigger that the smallest group. Sadly no group added ( ･᷄︵･᷅ )");
+//        }catch (WrongScriptInputException e) {
+//            ConsoleManager.printerror("Something is wrong...");
+//        }
         return false;
     }
 

@@ -1,12 +1,16 @@
 package managers;
 
 import commands.*;
+import exceptions.NoSuchCommandException;
 
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
+import java.util.function.Function;
 
 public class CommandFactory {
 
-    public final static Hashtable<String, AbstractCommand> map = new Hashtable<>();
+    public final static Map<String, AbstractCommand> map = new HashMap<>();
 
     private CollectionManager collectionManager;
     private InputAndVerifier inputAndVerifier;
@@ -24,13 +28,13 @@ public class CommandFactory {
         {
             map.put("ADD", addCommand);
             map.put("ADD_IF_MIN", addIfMinCommand);
-            map.put("CLEAR",clearCommand);
+            map.put("CLEAR", clearCommand);
             map.put("EXECUTE_SCRIPT", executeScript);
             map.put("EXIT", exit);
             map.put("FILTER_GREATER_THAN_BY_FORM_OF_EDUCATION", filterByFormOfEducationCommand);
             map.put("HELP", help);
-            map.put("HISTORY",history);
-            map.put("INFO",infoCommand);
+            map.put("HISTORY", history);
+            map.put("INFO", infoCommand);
             map.put("INSERT_AT", insertAtCommand);
             map.put("PRINT_FIELD_DESCENDING_SEMESTER_ENUM", printDecendingBySemester);
             map.put("REMOVE_BY_ID", removeByIdCommand);
@@ -42,13 +46,10 @@ public class CommandFactory {
         }
     }
 
-    public Command getCommand(String commandName) throws IllegalArgumentException {
+    public Command getCommand(String commandName) throws NoSuchCommandException {
+
         AbstractCommand command = map.get(commandName.toUpperCase());
-        try {
-            return command;
-        } catch (IllegalArgumentException e) {
-            ConsoleManager.printerror("No such command" + commandName.toUpperCase());
-        }
-        return null;
+        //check
+        return command;
     }
 }

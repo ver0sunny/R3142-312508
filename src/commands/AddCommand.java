@@ -17,7 +17,7 @@ public class AddCommand extends AbstractCommand implements Command {
     private InputAndVerifier inputAndVerifier;
 
     public AddCommand(CollectionManager collectionManager, InputAndVerifier inputAndVerifier) {
-        super("add {element}", "addition of a new element to the collection");
+        super("add", "adds a new element to the collection");
         this.collectionManager = collectionManager;
         this.inputAndVerifier = inputAndVerifier;
     }
@@ -41,10 +41,6 @@ public class AddCommand extends AbstractCommand implements Command {
 //            ConsoleManager.printerror("Something went wrong...");
 //        }
 //        return false;
-    }
-    @Override
-    public String toString() {
-        return new StringBuilder().append(this.getName()).append(this.getDescription()).toString();
     }
 
     @Override

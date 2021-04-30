@@ -8,7 +8,7 @@ public class Exit extends AbstractCommand {
 
     @Override
     public boolean execute(String arg) {
-        return true;
 
+        return true;
     }
 }

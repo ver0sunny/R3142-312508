@@ -1,6 +1,8 @@
 package managers;
 
 import commands.AbstractCommand;
+import exceptions.NoArgumentProvidedException;
+import exceptions.NoElementWithSuchIdException;
 import exceptions.WrongScriptInputException;
 
 import java.sql.SQLOutput;
@@ -29,12 +31,12 @@ public class CommandManager {
     }
 
 
-
-    public void execute(String commandName) {
+    public void execute(String commandName, String arg) {
         try {
-            commandFactory.getCommand(commandName).execute();
-        } catch (WrongScriptInputException e) {
-            ConsoleManager.printerror("Something went wrong");
+        if (arg == "") throw new NoArgumentProvidedException();
+        commandFactory.getCommand(commandName).execute(arg);
+        } catch (NoArgumentProvidedException e) {
+            ConsoleManager.printerror("No argument provided, check requirements" + commandFactory.getCommand(commandName).getName());
         }
     }
 }

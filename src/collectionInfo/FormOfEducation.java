@@ -8,7 +8,7 @@ public enum FormOfEducation {
     public static String listAll() {
         StringBuilder listAll = new StringBuilder();
         for (FormOfEducation formOfEducation : values()) {
-            listAll.append(formOfEducation.name()).append(", ");
+            listAll.append(formOfEducation.name()).append(" ");
         }
         return listAll.toString();
     }

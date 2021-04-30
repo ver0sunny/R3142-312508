@@ -19,7 +19,7 @@ public abstract class AbstractCommand implements Command {
 
     @Override
     public String toString() {
-        return new StringBuilder().append(name).append("(").append(description).append(")").toString();
+        return new StringBuilder().append(name).append(" ~ ").append("(").append(description).append(")").toString();
     }
 
     @Override

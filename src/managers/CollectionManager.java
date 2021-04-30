@@ -83,6 +83,21 @@ public class CollectionManager {
         return studyGroupsCollection.getLast().getId() + 1;
     }
 
+    public void updateAllId() {
+        int i = 0;
+        for (StudyGroup studyGroup : studyGroupsCollection) {
+            studyGroup.setId(i+1);
+        }
+    }
+
+//    public void insertAt(Integer id) {
+//        for (StudyGroup studyGroup : studyGroupsCollection) {
+//            if (studyGroup.getId() == id) {
+//
+//            }
+//        }
+//    }
+
     public void removeById(Integer id) {
         try {
             if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();

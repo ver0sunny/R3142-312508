@@ -144,7 +144,6 @@ public class StudyGroup implements Comparable<StudyGroup> {
         sb.append("\n");
 
         sb.append("-*-*--*-*--*-*--*-*--*-*--*-*-");
-        sb.append("\n");
 
         return sb.toString();
     }

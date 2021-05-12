@@ -1,12 +1,12 @@
 package managers;
 
 import commands.*;
+import exceptions.HistoryIsEmptyException;
 import exceptions.NoSuchCommandException;
 
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 
 public class CommandFactory {
 
@@ -15,11 +15,10 @@ public class CommandFactory {
     private CollectionManager collectionManager;
     private InputAndVerifier inputAndVerifier;
 
-
     public CommandFactory(CollectionManager collectionManager, InputAndVerifier inputAndVerifier, AddCommand addCommand,
                           AddIfMinCommand addIfMinCommand, ClearCommand clearCommand, ExecuteScript executeScript,
-                          Exit exit, FilterByFormOfEducationCommand filterByFormOfEducationCommand,
-                          HelpCommand help, History history, InfoCommand infoCommand, InsertAtCommand insertAtCommand,
+                          ExitCommand exitCommand, FilterByFormOfEducationCommand filterByFormOfEducationCommand,
+                          HelpCommand helpCommand, History history, InfoCommand infoCommand, InsertAtCommand insertAtCommand,
                           PrintDecendingBySemester printDecendingBySemester, RemoveByIdCommand removeByIdCommand,
                           RemoveByStudentCount removeByStudentCount, SaveCommand saveCommand, ShowCommand showCommand,
                           UpdateCommand updateCommand) {
@@ -30,9 +29,9 @@ public class CommandFactory {
             map.put("ADD_IF_MIN", addIfMinCommand);
             map.put("CLEAR", clearCommand);
             map.put("EXECUTE_SCRIPT", executeScript);
-            map.put("EXIT", exit);
-            map.put("FILTER_GREATER_THAN_BY_FORM_OF_EDUCATION", filterByFormOfEducationCommand);
-            map.put("HELP", help);
+            map.put("EXIT", exitCommand);
+            map.put("FILTER_GREATER_THAN_FORM_OF_EDUCATION", filterByFormOfEducationCommand);
+            map.put("HELP", helpCommand);
             map.put("HISTORY", history);
             map.put("INFO", infoCommand);
             map.put("INSERT_AT", insertAtCommand);

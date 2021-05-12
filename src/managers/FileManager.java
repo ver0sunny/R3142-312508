@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class FileManager {
     private static final Gson gson = new Gson();
-    private static String uploadedFile;
+    private String uploadedFile;
 
     public FileManager(String uploadedFile) {
         this.uploadedFile = uploadedFile;
@@ -34,14 +34,13 @@ public class FileManager {
     }
 
 
-    public static LinkedList<StudyGroup> readFile() {
+    public LinkedList<StudyGroup> readFile() {
         if (uploadedFile != null) {
             try {
                 File filename = new File(uploadedFile);
                 Scanner sc = new Scanner(filename);
                 LinkedList<StudyGroup> collection;
-                collection = gson.fromJson(sc.nextLine().trim(), new TypeToken<LinkedList<StudyGroup>>() {
-                }.getType());
+                collection = gson.fromJson(sc.nextLine().trim(), new TypeToken<LinkedList<StudyGroup>>(){}.getType());
                 ConsoleManager.println(" (: File upload was SUCCESSFUL :)");
                 return collection;
             } catch (FileNotFoundException e) {

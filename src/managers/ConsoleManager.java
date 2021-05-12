@@ -1,6 +1,8 @@
 package managers;
 
 import commands.Command;
+import exceptions.NoArgumentProvidedException;
+import exceptions.NoSuchCommandException;
 import sun.security.krb5.SCDynamicStoreConfig;
 
 import java.util.NoSuchElementException;
@@ -20,20 +22,23 @@ public class ConsoleManager {
         String[] command;
         try {
             do {
-        command = (userInput.nextLine().trim() + " ").split(" ", 2);
-        command[1] = command[1].trim();
+                command = (userInput.nextLine().trim() + " ").split(" ", 2);
+                command[1] = command[1].trim();
 //        commandManager.addToHistory();
-        commandManager.execute(command[0],command[1]);
+                commandManager.execute(command[0], command[1]);
+
             } while (true);
         } catch (NoSuchElementException exception) {
             ConsoleManager.printerror("No user input detected");
         } catch (IllegalStateException exception) {
             ConsoleManager.printerror("Something unexpected went wrong");
+        } catch (NoSuchCommandException e) {
+            ConsoleManager.printerror("No such command exist, check the list of available commands by calling 'help' command");
         }
     }
 
     public void scriptMode() {
-        String[] command = {"",""};
+        String[] command = {"", ""};
     }
 
     public static void print(Object someThing) {

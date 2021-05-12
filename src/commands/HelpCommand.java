@@ -16,7 +16,7 @@ public class HelpCommand extends AbstractCommand {
         ConsoleManager.println(CommandFactory.map.get("CLEAR").toString());
         ConsoleManager.println(CommandFactory.map.get("EXECUTE_SCRIPT").toString());
         ConsoleManager.println(CommandFactory.map.get("EXIT").toString());
-        ConsoleManager.println(CommandFactory.map.get("FILTER_GREATER_THAN_BY_FORM_OF_EDUCATION").toString());
+        ConsoleManager.println(CommandFactory.map.get("FILTER_GREATER_THAN_FORM_OF_EDUCATION").toString());
         ConsoleManager.println(CommandFactory.map.get("HELP").toString());
         ConsoleManager.println(CommandFactory.map.get("HISTORY").toString());
         ConsoleManager.println(CommandFactory.map.get("INFO").toString());

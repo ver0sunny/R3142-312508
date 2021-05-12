@@ -3,6 +3,7 @@ package managers;
 import collectionInfo.FormOfEducation;
 import collectionInfo.StudyGroup;
 import exceptions.CollectionIsEmptyException;
+import exceptions.NoSuchStudentsCountException;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -101,11 +102,7 @@ public class CollectionManager {
     public void removeById(Integer id) {
         try {
             if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-            for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with intellij context
-                if (studyGroup.getId().equals(id)) {
-                    studyGroupsCollection.remove(studyGroup);
-                }
-            }
+            studyGroupsCollection.removeIf(studyGroup -> studyGroup.getId().equals(id));
         }catch (CollectionIsEmptyException e) {
             ConsoleManager.printerror("Collection is empty");
         }
@@ -121,31 +118,31 @@ public class CollectionManager {
 
     public void removeByStudentsCount(int studyCount) {
         try {
+            int theGroupsCount = 0;
             if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
-            for (StudyGroup studyGroup : studyGroupsCollection) { //potentially replace with a context suggestion
+            for (StudyGroup studyGroup : studyGroupsCollection) {
                 if (studyGroup.getStudentsCount() == studyCount) {
-                    studyGroupsCollection.remove(studyGroup);
+                    theGroupsCount +=1;
                 }
             }
+            if (theGroupsCount == 0) throw new NoSuchStudentsCountException();
+            studyGroupsCollection.removeIf(studyGroup -> studyGroup.getStudentsCount() == studyCount);
         } catch (CollectionIsEmptyException e) {
-            ConsoleManager.printerror("No group with this many students found");
+            ConsoleManager.printerror("Collection is empty T-T");
+        }catch (NoSuchStudentsCountException e) {
+            ConsoleManager.printerror("No groups with this many students found");
         }
-
     }
 
     public LinkedList<StudyGroup> greaterThanByFormOfEducation(FormOfEducation formOfEducation) throws CollectionIsEmptyException {
-//        try {
         if (studyGroupsCollection.isEmpty()) throw new CollectionIsEmptyException();
+        LinkedList<StudyGroup> linkedList = new LinkedList<>();
         for (StudyGroup studyGroup : studyGroupsCollection) {
             if (studyGroup.getFormOfEducation().compareTo(formOfEducation) > 0) {
-                LinkedList<StudyGroup> linkedList = new LinkedList<>();
                 linkedList.add(studyGroup);
                 return linkedList;
             }
         }
-//        } catch (CollectionIsEmptyException e) {
-//            ConsoleManager.printerror("Collection is empty. There is nothing to compare");
-//        }
         return null;
     }
 

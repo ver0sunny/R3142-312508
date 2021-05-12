@@ -3,6 +3,7 @@ package commands;
 import collectionInfo.FormOfEducation;
 import collectionInfo.StudyGroup;
 import exceptions.CollectionIsEmptyException;
+import exceptions.NoArgumentProvidedException;
 import exceptions.WrongScriptInputException;
 import managers.CollectionManager;
 import managers.ConsoleManager;
@@ -19,14 +20,17 @@ public class FilterByFormOfEducationCommand extends AbstractCommand {
     }
 
     @Override
-    public boolean execute(String args) {
+    public boolean execute(String arg) {
         try {
-            FormOfEducation formOfEducation = FormOfEducation.valueOf(args.toUpperCase());
+            if (arg == "") throw new IllegalArgumentException();
+            FormOfEducation formOfEducation = FormOfEducation.valueOf(arg.toUpperCase());
             LinkedList<StudyGroup> list = collectionManager.greaterThanByFormOfEducation(formOfEducation);
-            list.toString();
+            ConsoleManager.println(list.toString());
             return true;
         }catch (CollectionIsEmptyException e) {
             ConsoleManager.printerror("Collection is empty T-T");
+        }catch (IllegalArgumentException e) {
+            ConsoleManager.printerror("No filtering parameter provided or no such form of education exists, enter correct form of education");
         }
         return false;
     }
